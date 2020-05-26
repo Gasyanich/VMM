@@ -1,12 +1,94 @@
-﻿<Window x:Class="VMM.Views.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:VMM"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+﻿<mah:MetroWindow x:Class="VMM.Views.MainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:local="clr-namespace:VMM"
+                 xmlns:viewModels="clr-namespace:VMM.ViewModels"
+                 xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 mc:Ignorable="d"
+                 Title="MainWindow" Height="650" Width="1200" WindowState="Maximized"
+                 d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Background="White" Margin="0,0,0,15">
+            <MenuItem Header="Файл" />
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical">
+                <Expander Header="Выбор ЗК" Background="White" BorderThickness="0" IsExpanded="True">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="КА:" Grid.Row="0" Grid.Column="0" Margin="5,10,5,0" TextAlignment="Center" />
+                        <ComboBox Grid.Row="0" Grid.Column="1" Margin="5,5,5,0"
+                                  ItemsSource="{Binding SpaceCrafts}" DisplayMemberPath="Name"
+                                  SelectedItem="{Binding SelectedSpaceCraft}" />
+
+                        <TextBlock Text="№ ОЭП:" Grid.Row="1" Grid.Column="0" Margin="5,10,5,0" TextAlignment="Center" />
+                        <ComboBox Grid.Row="1" Grid.Column="1" Margin="5,5,5,0"
+                                  ItemsSource="{Binding SelectedSpaceCraft.Oeps}"
+                                  SelectedItem="{Binding SelectedOep}" DisplayMemberPath="Number" />
+
+                        <TextBlock Text="№ ЗК:" Grid.Row="2" Grid.Column="0" Margin="5,10,5,0" TextAlignment="Center" />
+                        <ComboBox Grid.Row="2" Grid.Column="1" Margin="5,5,5,0"
+                                  ItemsSource="{Binding SelectedOep.CompensationZones}"
+                                  SelectedItem="{Binding SelectedCompensationZone}" DisplayMemberPath="Name" />
+
+                        <Button Content="Клик ми" Grid.Row="3" Grid.Column="1" Width="120" Height="30"
+                                HorizontalAlignment="Right" Margin="7" Click="ButtonBase_OnClick" />
+                    </Grid>
+                </Expander>
+
+                <Expander Header="Видимость графиков" Background="White" BorderThickness="0" IsExpanded="True">
+                    <ListBox ItemsSource="{Binding LineSeries}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Rectangle Width="10" Height="10" Fill="Red"/>
+                                    <TextBlock Text="{Binding Title}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Expander>
+
+            </StackPanel>
+
+            <GridSplitter HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.Column="1" Width="3" />
+
+            <lvc:CartesianChart LegendLocation="Right" Grid.Column="2" Series="{Binding SeriesCollection}"
+                                Margin="10,0,0,0"
+                                DisableAnimations="True" Hoverable="False" DataTooltip="{x:Null}" Zoom="Xy">
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Пикесли (X)" LabelFormatter="{Binding YSxFormatter}" />
+                    <lvc:Axis Title="Пикесли (Y)" LabelFormatter="{Binding YSyFormatter}" Position="RightTop" />
+                </lvc:CartesianChart.AxisY>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Номер строк изображения" MinValue="0" />
+                </lvc:CartesianChart.AxisX>
+            </lvc:CartesianChart>
+        </Grid>
     </Grid>
-</Window>
+</mah:MetroWindow>

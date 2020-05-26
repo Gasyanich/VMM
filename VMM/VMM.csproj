@@ -90,7 +90,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data\Oep.cs" />
+    <Compile Include="Data\ProtocolRow.cs" />
+    <Compile Include="Data\CompensationZone.cs" />
+    <Compile Include="Data\SpaceCraft.cs" />
+    <Compile Include="Services\ProtocolLoaderService.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ObservableObjects\Data\CompensationZoneVM.cs" />
+    <Compile Include="ViewModels\ObservableObjects\Data\OepVM.cs" />
+    <Compile Include="ViewModels\ObservableObjects\Data\ProtocolRowVM.cs" />
+    <Compile Include="ViewModels\ObservableObjects\Data\SpaceCraftVM.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -123,59 +132,61 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_1_ProtocolKPK_1.txt">
+    <Folder Include="ViewModels\ObservableObjects\Charts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_1_ProtocolKPK_1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_1_ProtocolKPK_2.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_1_ProtocolKPK_2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_1_ProtocolKPK_3.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_1_ProtocolKPK_3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_1_ProtocolKPK_4.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_1_ProtocolKPK_4.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_1_ProtocolKPK_5.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_1_ProtocolKPK_5.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_2_ProtocolKPK_0.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_2_ProtocolKPK_0.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_2_ProtocolKPK_1.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_2_ProtocolKPK_1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_2_ProtocolKPK_2.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_2_ProtocolKPK_2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_2_ProtocolKPK_3.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_2_ProtocolKPK_3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_2_ProtocolKPK_4.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_2_ProtocolKPK_4.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_2_ProtocolKPK_5.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_2_ProtocolKPK_5.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_3_ProtocolKPK_0.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_3_ProtocolKPK_0.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_3_ProtocolKPK_1.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_3_ProtocolKPK_1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_3_ProtocolKPK_2.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_3_ProtocolKPK_2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_3_ProtocolKPK_3.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_3_ProtocolKPK_3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_3_ProtocolKPK_4.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_3_ProtocolKPK_4.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_3_ProtocolKPK_5.txt">
+    </None>
+    <None Include="Resources\Protocols\10504_01_Aurora_10rows\0001_0001_10513_1_10504_01_10_3_ProtocolKPK_5.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </None>
     <Resource Include="Resources\Protocols\10504_01_Aurora_1row\0001_0001_10513_1_10504_01_10_1_ProtocolKPK_1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
